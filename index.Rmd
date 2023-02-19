@@ -51,7 +51,8 @@ Write a summary paragraph of findings that includes the 5 values calculated from
 
 ### Table
 
-Include a table of aggregate information
+```{r, echo = FALSE, code = readLines("table.R"), message = FALSE}
+```
 
 Describe why you included the table and what information it reveals
 
