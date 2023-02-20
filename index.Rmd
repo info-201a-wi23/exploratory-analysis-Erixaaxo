@@ -84,7 +84,7 @@ This table was included as a way to show a summarized version of the Kidz Bop da
 ```{r, echo = FALSE, code = readLines("chart1.R"), message = FALSE}
 ```
 
-Describe why you chose this chart and what information it reveals
+I chose this chart because it is simple to understand, while it reveals some detailed information. On my x-axis, i have the categories of bad words. On the y-axis, it is the percent conversion rate on censorship. It takes the total amount of bad words found in songs and convert it to how many actually get censored in the KidzBop version. This is important to note because, it shows a priority oh which seem more important to censor first, and which ones that are more on "thin ice" and has less importance.
 
 ### Chart 2
 
