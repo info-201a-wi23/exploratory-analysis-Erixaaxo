@@ -91,7 +91,7 @@ I chose this chart because it is simple to understand, while it reveals some det
 ```{r, echo = FALSE, code = readLines("chart2.R")}
 ```
 
-Describe why you chose this chart and what information it reveals
+This chart serves to show the censorship over time. The chart reveals an increase in censorship, but the cause for the censorship  whether it be an increase in profanity in songs or stricter censorship rules, is unknown. The chart also reveals that 2015 had the most censored words, while 2001 had the least. While this chart serves to show the censorship over time, with this chart, you can also estimate the future of censorship in KidzBop.
 
 ### Chart 3
 
