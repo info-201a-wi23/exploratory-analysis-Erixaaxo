@@ -61,7 +61,11 @@ Though our topic is relatively light-hearted, in our project we would have to ad
 
 ### Summary Information
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
+```{r, echo = FALSE, code = readLines("calc_values.R")}
+```
+In summary, our team is most interested in finding the breadth of censorship kidz bop embeds into their parodic music. To begin, we found out that as a total, kidz bop censored 2966 words from all their songs. This illustrates an average of 2 censored words per song. In addition, the most censored word across all songs, derived from our calculated values is "fuck". This is pretty unsurprising as fuck is very common in many songs although it is extremely vulgar. Thirdly, the most censored category is profanity. In contrast, this category being the most popular is quite surprising as other categories like drugs & alcohol exist and violence exist within our dataset. Moving forward, the year with the least censored words in songs is 2001 while the year with the most censored songs is 2015. This goes to show the overall progressive evolution of vulgarity in music throughout the decades. 
+ 
+
 
 ### Table
 
@@ -95,3 +99,4 @@ Describe why you chose this chart and what information it reveals
 ```
 
 Describe why you chose this chart and what information it reveals
+
