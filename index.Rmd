@@ -2,6 +2,20 @@
 title: "Exploratory Analysis"
 output: html_document
 ---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+
+# load necessary ALL libraries
+library("dplyr")
+library("stringr")
+library("ggplot2")
+
+# source all R files
+source("table.R")
+source("chart1.R")
+source("chart2.R")
+source("chart3-NR.R")
+```
 
 ## Project title
 
@@ -51,7 +65,12 @@ Write a summary paragraph of findings that includes the 5 values calculated from
 
 ### Table
 
-```{r, echo = FALSE, code = readLines("table.R"), message = FALSE}
+```{r summary_table}
+table_caption <- paste("Top 10 Most Frequent Swear Words")
+
+knitr::kable(summary_table,
+             col.names = c("badword", "category", "total_count", "category_count", "category_prop"),
+             caption = table_caption)
 ```
 
 Describe why you included the table and what information it reveals
