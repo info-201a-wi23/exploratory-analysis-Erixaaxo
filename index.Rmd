@@ -2,6 +2,7 @@
 title: "Exploratory Analysis"
 output: html_document
 ---
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 
@@ -37,35 +38,44 @@ Overall, our final project aims to address the discrepancy regarding the censors
 
 Kidz Bop, music, censorship, kids, cursing
 
-### Introduction  
+### Introduction
 
 Kidz Bop has been a popular kid singing group for years, covering popular songs and changing lyrics to make them kid-friendly. They have been around for many generations of childhoods and it is always fun hearing what popular songs they covered next. But it begs the questions: Why do they censor certain lyrics? What gets censored the most? And does it bring harm that they censor so much of the song that it takes away the meaning? These questions are important as censorship has always been a heavy topic in the media, but Kidz Bop has never been questioned on their own censorship.
 
-### Related Work  
+### Related Work
 
 The topic is censorship. Censorship is defined as the suppression of words, images, and ideas due to the fact they might be seen as offensive [(ACLU 2023)](https://www.aclu.org/other/what-censorship). Censorship has known to be harmful to kids in the learning environment and also in the real world too. For example, sex education is not taught in every school. This becomes an issue in the real world too when people and young adults do not know safety protocols that keep them safe and healthy, according to [Everyday Health](https://www.everydayhealth.com/kids-health/censorship-schools-effects-on-our-children/). Within censorship in music, may laswsuits have come around regarding if music should be censored. Luckily, the Supreme Court ruled in favor of the artists as music is a form of free speech and should be protected as long as it does not promote hate. [(Fisher 2023)](https://www.mtsu.edu/first-amendment/article/1132/music-censorship)
 
 ### The Dataset
 
-We found our data from the pudding dataset.
-[Kidz Bop Dataset](https://github.com/the-pudding/data/tree/master/kidz-bop)
+We found our data from the pudding dataset. [Kidz Bop Dataset](https://github.com/the-pudding/data/tree/master/kidz-bop)
 
 The data was collected by Jan Diehm. She collected the data using the Genius API, Spotify API, R, as well as manual wrangling. The data was collected for the pudding arctile, ["Just how does Kidz Bop censor songs?"](https://pudding.cool/2020/04/kidz-bop/), which aims to highlight just what words are being censored, what they're replaced with, and what category of bad word they are. We will be focusing on two of the datasets within the project, KB_censored-lyrics (10 columns and 1354 rows) and KB_word-overview (5 columns and 227 rows).
 
 ### Implications
 
-The censorship of popular songs by Kidz Bop has several implications for technologists, designers, and policymakers in the future. For one, the given data has the power to make music producers and publishers rethink their censorship strategies. To explain, the analysis of this data will allow us to see if censorship of certain types of foul language is truly beneficial to the developing mind of a child. Whether we are proven right or wrong, our conclusion will enable producers of Kidz Bop to perhaps take a more progressive approach with their censorship methods. As for technologists and designers, I feel that the answer to our research questions will influence technologists and designers to fully understand how the use of swear words or foul language within applications affects child behavior. Hopefully enabling designers to become more in tune with the youth to give them user experiences that are more in touch with today’s standard values. Finally, I feel that policymakers would be faced with the most beneficial implications from the revealing of our research questions as they are the ones that will incite real change. For example, policymakers can set new more reformist policies that combat censorship and promote a more genuine and free music experience for children.
+The censorship of popular songs by Kidz Bop has several implications for technologists, designers, and policymakers in the future. For one, the given data has the power to make music producers and publishers rethink their censorship strategies. To explain, the analysis of this data will allow us to see if censorship of certain types of foul language is truly beneficial to the developing mind of a child. Whether we are proven right or wrong, our conclusion will enable producers of Kidz Bop to perhaps take a more progressive approach with their censorship methods. As for technologists and designers, I feel that the answer to our research questions will influence technologists and designers to fully understand how the use of swear words or foul language within applications affects child behavior. Hopefully enabling designers to become more in tune with the youth to give them user experiences that are more in touch with today's standard values. Finally, I feel that policymakers would be faced with the most beneficial implications from the revealing of our research questions as they are the ones that will incite real change. For example, policymakers can set new more reformist policies that combat censorship and promote a more genuine and free music experience for children.
 
 ### Limitations & Challenges
+
 Though our topic is relatively light-hearted, in our project we would have to address the challenge of censorship. We have to ask what amount of censorship is the right amount? With too little censorship, the songs may have a negative influence on the child audience if they're constantly listening to songs about substance abuse or violence. However, with too much censorship, Kidz Bop may be keeping their audience too sheltered or closed-minded by censoring words such as "transgender" and "pray." In addition, our group would have to address the limitations of the dataset we have. We have no way of telling how or what criteria Kidz Bop censors the lyrics off of. Is it an algorithm, one person, or a whole team of people selecting which lyrics censor? What is their reasoning behind the censorship? Limitations in the data like that would prevent our group from accurately addressing the challenge of censorship.
 
 ### Summary Information
 
-```{r, echo = FALSE, code = readLines("calc_values.R")}
-```
-In summary, our team is most interested in finding the breadth of censorship kidz bop embeds into their parodic music. To begin, we found out that as a total, kidz bop censored 2966 words from all their songs. This illustrates an average of 2 censored words per song. In addition, the most censored word across all songs, derived from our calculated values is "fuck". This is pretty unsurprising as fuck is very common in many songs although it is extremely vulgar. Thirdly, the most censored category is profanity. In contrast, this category being the most popular is quite surprising as other categories like drugs & alcohol exist and violence exist within our dataset. Moving forward, the year with the least censored words in songs is 2001 while the year with the most censored songs is 2015. This goes to show the overall progressive evolution of vulgarity in music throughout the decades. 
- 
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+kidz_bop_df <- read.csv("https://raw.githubusercontent.com/the-pudding/data/master/kidz-bop/KB_censored-lyrics.csv", stringsAsFactors = FALSE)
 
+library("dplyr")
+total_words_censored <- sum(kidz_bop_df$count, na.rm = T)
+most_censored_word <- kidz_bop_df %>% group_by(badword) %>% summarise(count = sum(count)) %>% filter(count == max(count)) %>% pull(badword)
+most_censored_category <- kidz_bop_df %>% group_by(category) %>% summarise(count = sum(count)) %>% filter(count == max(count)) %>% pull(category)
+most_censored_year <- kidz_bop_df %>% group_by(year) %>% summarise(count = sum(count)) %>% filter(count == max(count)) %>% pull(year)
+least_censored_year <- kidz_bop_df %>% group_by(year) %>% summarise(count = sum(count)) %>% filter(count == min(count)) %>% pull(year)
+
+
+```
+
+In summary, our team is most interested in finding the breadth of censorship kidz bop embeds into their parodic music. To begin, we found out that as a total, kidz bop censored 2966 words from all their songs. This illustrates an average of 2 censored words per song. In addition, the most censored word across all songs, derived from our calculated values is "fuck". This is pretty unsurprising as fuck is very common in many songs although it is extremely vulgar. Thirdly, the most censored category is profanity. In contrast, this category being the most popular is quite surprising as other categories like drugs & alcohol exist and violence exist within our dataset. Moving forward, the year with the least censored words in songs is 2001 while the year with the most censored songs is 2015. This goes to show the overall progressive evolution of vulgarity in music throughout the decades.
 
 ### Table
 
@@ -91,12 +101,28 @@ I chose this chart because it is simple to understand, while it reveals some det
 ```{r, echo = FALSE, code = readLines("chart2.R")}
 ```
 
-This chart serves to show the censorship over time. The chart reveals an increase in censorship, but the cause for the censorship  whether it be an increase in profanity in songs or stricter censorship rules, is unknown. The chart also reveals that 2015 had the most censored words, while 2001 had the least. While this chart serves to show the censorship over time, with this chart, you can also estimate the future of censorship in KidzBop.
+This chart serves to show the censorship over time. The chart reveals an increase in censorship, but the cause for the censorship whether it be an increase in profanity in songs or stricter censorship rules, is unknown. The chart also reveals that 2015 had the most censored words, while 2001 had the least. While this chart serves to show the censorship over time, with this chart, you can also estimate the future of censorship in KidzBop.
 
 ### Chart 3
 
-```{r, echo = FALSE, code = readLines("chart3-NR.R")}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library("dplyr")
+library("ggplot2")
+library("stringr")
+
+# Reading CSV file
+kidz_bop_df <- read.csv("https://raw.githubusercontent.com/the-pudding/data/master/kidz-bop/KB_censored-lyrics.csv", stringsAsFactors = FALSE)
+
+
+# Grouping Bad Words with Category
+bad_words_per_category <- kidz_bop_df %>% group_by(category) %>% summarize(bad_words_per_category = sum(count, na.rm = T))
+
+
+
+# Creating Graph
+ggplot(data = bad_words_per_category, aes(x = category, y = bad_words_per_category)) +
+  geom_bar(stat = "identity")
+
 ```
 
-Describe why you chose this chart and what information it reveals
-
+The chart shown above gives an excellent insight to the distribution of bad words per category. Overall, the chart reveals that profanity is the most popular category of bad word to censor whilst sexual bad words trail behind. It's also important to how the censorship of identity holds a significant margin within this graph. While this category of identity holds less of a margin now, I'm sure it will be one of the fastest climbing categories due to the current climate of censoring music.
