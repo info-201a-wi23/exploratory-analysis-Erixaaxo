@@ -22,6 +22,6 @@ category_count <- category_count %>% mutate(category_prop = n / num_categories)
 # Created the final table df by joining the category_count df and new_df, renamed and reordered the columns
 summary_table <- left_join(new_df, category_count, by= "category")
 colnames(summary_table)[4] = "category_count"
-summary_table <- summary_table[,c("badword", "category", "total_count","category_count", "category_prop")]
+summary_table <- summary_table[,c("badword", "total_count", "category", "category_count", "category_prop")]
 
 
